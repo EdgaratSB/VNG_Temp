@@ -20,10 +20,10 @@ Feedback is ten alle tijden welkom op: (BLANK)
 
 ![VNG v3](https://user-images.githubusercontent.com/92762874/167464958-f43bbec7-0c0e-407f-b6cf-7f6439505768.jpg)
 
-# #Omschrijving flows
+# Omschrijving flows
 
 # Overzicht referentiecomponenten
 
-# Aanvullende toelichting)
+# Aanvullende toelichting
 
 # Demo
