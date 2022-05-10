@@ -5,7 +5,7 @@ Tijdelijke staging repo voor RAWA Implementatiescenarios/referentiearchitectuur
 
 Onderstaand volgt een toelichting van de referentiearchitectuur werken met API's, zoals hieronder weergegeven. De toelichting is bedoeld om een begrip van de doelstelling te verkrijgen, en als ondersteuning bij realisatie hiervan in een zo breed mogelijke context. 
 
-Er wordt van enige technische achtergrond uit gegaan in de uitleg, en begrip van enkele concepten zoals: (Docker, OIDC/OAuth "AAN TE VULLEN"). De architectuur is dusdanig opgezet dat er zo veel mogelijk vrije componentkeuze plaats kan vinden. Als gevolg hiervan kunnen niet alle verschillende implementatiescenarios in detail beschreven worden, gezien deze afhankelijk van de gemaakte keuzes kunnen verschillen. Om deze reden word er met enige regelmaat verwezen naar de documentatie van componenten, waar uitgebreide omschrijvingen terug te vinden zijn.   
+Er wordt van enige technische achtergrond uit gegaan in de uitleg, en begrip van enkele concepten zoals: (Docker, OIDC/OAuth). De architectuur is dusdanig opgezet dat er zo veel mogelijk vrije componentkeuze plaats kan vinden. Als gevolg hiervan kunnen niet alle verschillende implementatiescenarios in detail beschreven worden, gezien deze afhankelijk van de gemaakte keuzes kunnen verschillen. Om deze reden word er met enige regelmaat verwezen naar de documentatie van componenten, waar uitgebreide omschrijvingen terug te vinden zijn.   
 
 Om toch een goed beeld te kunnen schetsen voor een breder publiek met minder technische kennis, is er een handleiding geschreven om een lokale demo-opstelling te realiseren. Deze is ingericht met de gedachte het moeten configureren minimaal te behouden, en toch een goed gevoel te kunnen krijgen bij het concept.
 
@@ -18,15 +18,14 @@ De beschrijving van de referentiearchitectuur heeft de volgende structuur:
 - [Aanvullende toelichting](#Aanvullendetoelichting)
 - [Demo](#Demo)
 
-Feedback is ten alle tijden welkom op: (BLANK)
+Feedback? Hoe u kunt [bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md) vind u hier.
 
 ## Implementatiescenario RAWA
 
 ![VNG v4](https://user-images.githubusercontent.com/92762874/167503331-e787d2ea-afa1-4e77-b812-7caa9a433813.png)
 
 ## Toelichting architectuurplaat
-Realisatie van de bovenstaande omschreven stack heeft als hoofdzakelijke doelstelling het beveiligen van API's. De manier van beveiligen zoals hierboven omschreven, is tweeledig. Allereerst vind er authorizatie plaats, als primaire beveiligingslaag of een gebruiker of client uberaupt de API mag aanroepen. Daarna vind er authorizatie plaats, waar bepaald wordt of het verzoek dat gedaan word, voldoet aan vooraf gedefinieerd beleid. Op deze manier is er een uiterst fijnmazig toegangsbeleid hand te haven. Een voorbeeld zou zijn:
- - Een medewerker van de gemeente wilt
+Realisatie van de bovenstaande omschreven stack heeft als hoofdzakelijke doelstelling het beveiligen van API's. De manier van beveiligen zoals hierboven omschreven, is tweeledig. Allereerst vind er authorizatie plaats, als primaire beveiligingslaag of een gebruiker of client uberaupt de API mag aanroepen. Daarna vind er authorizatie plaats, waar bepaald wordt of het verzoek voldoet aan vooraf gedefinieerd beleid. Op deze manier is er een uiterst fijnmazig toegangsbeleid te handhaven. Het exacte verloop van dit proces kunt u hieronder vinden.
 
 ### Omschrijving flows
 
@@ -40,7 +39,7 @@ Realisatie van de bovenstaande omschreven stack heeft als hoofdzakelijke doelste
 
 3.	Aan de hand van de uitkomst van stap 2 zal de API Gateway handhaven, of het verzoek wel/niet door mag. De API gateway fungeert hier als Policy Enforcement Point (PEP).
 
-4.	Indien “Ja” bij stap 3 zal Authorizatie plaatsvinden. Het API verzoek, aangevuld met metadata vanuit de authenticatie, word in JSON format naar de policy engine gestuurd. Hier wordt aan de hand van een vooraf gedefinieerde policy, getoetst of het verzoek doorgang krijgt, en een uitslag teruggekoppeld naar de API gateway. (Voor detail over exacte werking, zie: [Aanvullende toelichting](#Hoewerkenpolicyengines)  
+4.	Indien “Ja” bij stap 3 zal Authorizatie plaatsvinden. Het API verzoek, aangevuld met metadata vanuit de authenticatie, word in JSON format naar de policy engine gestuurd. Hier wordt aan de hand van een vooraf gedefinieerde policy, getoetst of het verzoek doorgang krijgt, en een uitslag teruggekoppeld naar de API gateway. (Voor detail over exacte werking, zie: [Aanvullende toelichting](#Hoewerkenpolicyagents)  
 
 5.  Aan de hand van de uitkomst van stap 4 zal de API Gateway handhaven, of het verzoek wel/niet door mag. De API gateway fungeert hier als Policy Enforcement Point (PEP).
 
@@ -76,7 +75,7 @@ Ook hier is het advies om voor het gekozen platform naar de OIDC plugin document
 Hierna zou de OIDC koppeling gereed moeten zijn, en kan de OIDC aangezet worden op verschillende “routes” of “services”,  of globaal toegepast worden. Dit houdt in dat er voor bepaalde “wegen” naar een dienst toe OIDC afgedwongen wordt in het geval van “routes”. Of dat er voor bepaalde diensten OIDC afgedwongen wordt in het geval van services. Tot slot is het mogelijk ten alle tijden OIDC authenticatie af te dwingen in het geval van globale deployment.
 
 ### Hoe werken policy agents
-Een policy agent is een fundamenteel onderdeel van Policy Based Access Control (PBAC). Echter zijn er meer elementen nodig om het concept werkend te krijgen, namelijk een PEP, PDP, en PAP (met optioneel een PIP). In de "ARCHITECTUURPLAAT" zijn deze aangegeven met blauwe vakjes. Effectieve inzet van deze elementen samen, zijn ook in lijn met de principes van Zero-Trust Architecture. Een toegangsfilosofie met als hoofdzakelijke uitgangspunten real-time authorizatie en granulariteit. Beide concepten, worden samen met de componenten hieronder toegelicht. (Voor meer informatie over Zero-Trust, zie: NIST PAPER)
+Een policy agent is een fundamenteel onderdeel van Policy Based Access Control (PBAC). Echter zijn er meer elementen nodig om het concept werkend te krijgen, namelijk een PEP, PDP, en PAP (met optioneel een PIP). In de "ARCHITECTUURPLAAT" zijn deze aangegeven met blauwe vakjes. Effectieve inzet van deze elementen samen, zijn ook in lijn met de principes van Zero-Trust Architecture. Een toegangsfilosofie met als hoofdzakelijke uitgangspunten real-time authorizatie en granulariteit. Beide concepten, worden samen met de componenten hieronder toegelicht. (Voor meer informatie over Zero-Trust, zie: [NIST 800-207](https://csrc.nist.gov/publications/detail/sp/800-207/final)
 
 PDP - Policy Descision Point
 
@@ -99,7 +98,9 @@ De bovenstaande elementen samengebracht, kunnen op deze manier elke transactie b
 Tot slot is het mogelijk dat op basis van de data van het API verzoek, en bijbehorende metadata, onvoldoende informatie beschikbaar is om tot een beslissing te komen door de PDP. Het kan voorkomen dat externe databronnen geraadpleegd moeten worden, en deze vervullen in dit geval de rol van PIP. Zo kunnen er gedurende de overwegingen van een verzoek, API calls gemaakt worden door de policy engine, om aanvullende data op te halen uit bijvoorbeeld een HR systeem.
 
 ### Koppeling policy agents
-In de meeste gevallen zijn policy agents aan te sluiten op de API gateway doormiddel van een plugin. In de componentkeuze is dit een onderdeel dat goed overwogen moet worden, gezien niet elke policy engine met even veel gemak aangesloten kan worden op elke API gateway. (FORWARD AUTH?)
+In de meeste gevallen zijn policy agents aan te sluiten op de API gateway doormiddel van een plugin. In de componentkeuze is dit een onderdeel dat goed overwogen moet worden, gezien niet elke policy engine met even veel gemak aangesloten kan worden op elke API gateway. 
+
+(FORWARD AUTH benoemen en nader uitzoeken)
 
 # Demo
 
