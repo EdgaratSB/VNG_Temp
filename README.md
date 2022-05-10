@@ -3,7 +3,7 @@ Tijdelijke staging repo voor RAWA Implementatiescenarios/referentiearchitectuur
 
 ## Introductie
 
-Onderstaand volgt een toelichting van het referentie-implementatiescenario, zoals hierboven weergegeven. De toelichting is bedoeld om begrip van de doelstelling te verkrijgen, en als ondersteuning bij realisatie hiervan in een zo breed mogelijke context. 
+Onderstaand volgt een toelichting van de referentiearchitectuur werken met API's, zoals hieronder weergegeven. De toelichting is bedoeld om een begrip van de doelstelling te verkrijgen, en als ondersteuning bij realisatie hiervan in een zo breed mogelijke context. 
 
 Er wordt van enige technische achtergrond uit gegaan in de uitleg, en begrip van enkele concepten zoals: (Docker, OIDC/OAuth "AAN TE VULLEN"). De architectuur is dusdanig opgezet dat er zo veel mogelijk vrije componentkeuze plaats kan vinden. Als gevolg hiervan kunnen niet alle verschillende implementatiescenarios in detail beschreven worden, gezien deze afhankelijk van de gemaakte keuzes kunnen verschillen. Om deze reden word er met enige regelmaat verwezen naar de documentatie van componenten, waar uitgebreide omschrijvingen terug te vinden zijn.   
 
